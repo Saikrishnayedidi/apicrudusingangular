@@ -1,0 +1,82 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h1 class="text-light">Angular curd</h1>
+        <div class="d-flex">
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)='addbtn()'>
+                add employee
+            </button>
+        </div>
+    </div>
+</nav>
+
+<table class="table container">
+    <thead>
+        <tr>
+            <th scope="col">employee id</th>
+            <th scope="col">first name</th>
+             <th scope="col">last name</th> 
+             <th scope="col">email Id</th>
+             <th scope="col">mobile no</th>
+             <th scope="col">salary</th>
+             <th scope="col">action</th>
+        </tr>
+    </thead>
+    <tbody >
+        <tr  *ngFor='let item of data'>
+            <td>{{item.id}}</td>
+            <td>{{item.firstName}}</td>
+            <td> {{item.lastName}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.phonenum}}</td>
+            <td>{{item.salary}}</td>
+            <td>
+                <button class="btn btn-warning" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)= 'editbtn(item)'>edit</button>
+                <button class="btn btn-danger mx-3 " (click)=delete(item)>delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+     <form [formGroup]='formValue' (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label  class="form-label">first name</label>
+                <input type="text" class="form-control" formControlName='firstName' id="exampleFormControlInput1" placeholder="first name">
+              </div>
+              <div class="mb-3">
+                <label  class="form-label">last name</label>
+                <input type="text" class="form-control" formControlName='lastName' id="exampleFormControlInput1" placeholder="last name">
+              </div>
+            <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" formControlName='email' id="exampleFormControlInput1" placeholder="name@example.com">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">phonenumber</label>
+                <input type="number" class="form-control" formControlName='phonenum' id="exampleFormControlInput1" placeholder="phonenumber">
+              </div>
+              <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">salary</label>
+                <input type="email" class="form-control" formControlName='salary' id="exampleFormControlInput1" placeholder="salary">
+              </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id='cancel' data-bs-dismiss="modal">Close</button>
+          <button type="submit" *ngIf='showAddBtn' class="btn btn-primary" (click)="onSubmit()">add</button>
+          <button type="submit" *ngIf='showUpdateBtn' class="btn btn-primary" (click)="updatebtn()">update</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
